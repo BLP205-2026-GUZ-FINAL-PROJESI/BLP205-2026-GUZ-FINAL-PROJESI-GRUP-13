@@ -24,12 +24,11 @@ Fonksiyon isimleri plandır, kod yazıldıkça gerçek adlarla güncellenecektir
 
 ---
 
-
 ## Modül 1 - Bağlı Listeler ve Dosya İşlemleri
 
 **Sorumlu:** -
 
-**Dosyalar:** `ortak.h`, `modul1.h`, `modul1.cpp`
+**Dosyalar:** `modul1.h`, `modul1.cpp`
 
 **Fonksiyonlar:**
 - Kitap kataloğu (çift yönlü doğrusal bağlı liste): `kitapBasaEkle`, `kitapSonaEkle`, `kitapArayaEkle` (verilen ID'den önce), `kitapSil` (ID'ye göre)
@@ -48,7 +47,7 @@ Fonksiyon isimleri plandır, kod yazıldıkça gerçek adlarla güncellenecektir
 - Dairesel listede bir tur sonra başa dönülüyor, sonsuz döngü yok
 - Dosyaya yazılan kayıtlar okunup ekranda gösteriliyor
 
-**Ortak çalışma:** `Kitap` yapısının `ortak.h` içinde tanımlanması ve Modül 3 ile paylaşılması
+**Ortak çalışma:** Kitap listesinin başının (`kitapBas`) Modül 3 ile paylaşılması
 
 ---
 
@@ -56,7 +55,7 @@ Fonksiyon isimleri plandır, kod yazıldıkça gerçek adlarla güncellenecektir
 
 **Sorumlu:** Muhammed Furkan Gençkurt
 
-**Dosyalar:** `modul2.h`, `modul2.cpp`, `main.cpp`
+**Dosyalar:** `modul2.h`, `modul2.cpp`
 
 **Fonksiyonlar:**
 - İşlem geçmişi (bağlı liste tabanlı yığın): `stackPush`, `stackPop`, `stackPeek`, `stackListele`
@@ -71,7 +70,8 @@ Fonksiyon isimleri plandır, kod yazıldıkça gerçek adlarla güncellenecektir
 
 **Ortak çalışmalar:**
 - Ana menü (`main.cpp`) ve modüllerin menüye bağlanması
-- Ortak hatalı giriş kontrolü (`sayiOku`) ve geçersiz menü seçimi mesajları
+- `ortak.h` / `ortak.cpp`: `Kitap` yapısı, `sayiOku` ve `metinOku`
+- Geçersiz menü seçimi mesajları
 - Çıkışta tüm modüllerin temizlik fonksiyonlarının çağrılması
 - `README.md`, `GOREV_DAGILIMI.md`, `TEST_SENARYOLARI.md`
 - Ekran görüntüleri (`ekran_goruntuleri/`)
@@ -127,8 +127,9 @@ Fonksiyon isimleri plandır, kod yazıldıkça gerçek adlarla güncellenecektir
 
 ## Modüller Arası Bağlantı
 
-- **Modül 1 ve Modül 3:** Modül 3, Modül 1'in kitap listesini diziye aktarıp sıralar. Bu yüzden `Kitap` yapısı `ortak.h` dosyasında bir kez tanımlanır ve iki modül de bu dosyayı `#include "ortak.h"` ile kullanır. Alan adları (`id`, `ad`, `yazar`, `sayfa`) değiştirilmez.
+- **Modül 1 ve Modül 3:** Modül 3, Modül 1'in kitap listesini diziye aktarıp sıralar. `Kitap` yapısı `ortak.h` dosyasında hazırdır, iki modül de bu dosyayı `#include "ortak.h"` ile kullanır. Alan adları (`id`, `ad`, `yazar`, `sayfa`) değiştirilmez.
 - **Modül 2 ve Modül 4:** Diğer modüllerden bağımsızdır.
+- **Kullanıcı girişi:** Tüm modüller sayı okumak için `sayiOku()`, boşluk içerebilen metin (ad, kitap adı, duyuru) okumak için `metinOku()` kullanır. İkisi de `ortak.h` içindedir.
 - **Ana menü:** Her modül kendi menü fonksiyonunu (`modul1Menu` ... `modul4Menu`) ve temizlik fonksiyonlarını (örnek: `katalogTemizle`) kendi `.h` dosyasına yazar, ana menü bunları çağırır.
 - Modül 1 bitmeden Modül 3 kendi örnek kitap dizisiyle çalışabilir, entegrasyon sonra yapılır.
 
@@ -153,6 +154,7 @@ void modul3Menu();
 
 ```cpp
 #include <iostream>
+#include "ortak.h"
 #include "modul3.h"
 using namespace std;
 
@@ -163,7 +165,7 @@ void modul3Menu() {
         cout << "1. Bubble Sort (sayfa)\n";
         cout << "0. Ana menuye don\n";
         cout << "Seciminiz: ";
-        cin >> secim;
+        secim = sayiOku();
         switch (secim) {
             case 1: /* bubbleSortSayfa(); */ break;
             case 0: break;
@@ -177,7 +179,6 @@ Kurallar:
 - Modül dosyalarında `main()` olmaz. `main()` sadece `main.cpp` içindedir.
 - Kendi modülünüzü denemek için geçici bir `deneme.cpp` dosyası açıp içinde `main()` ile `modulXMenu()` çağırabilirsiniz. Bu dosya depoya yüklenmez.
 - Modül 1, kitap listesinin başını `modul1.h` içinde `extern Kitap* kitapBas;` olarak paylaşır. Modül 3 listeye bu değişkenle ulaşır.
-- Ortak `sayiOku()` fonksiyonu hazır olunca `cin >> secim;` yerine `secim = sayiOku();` kullanılır.
 
 ---
 

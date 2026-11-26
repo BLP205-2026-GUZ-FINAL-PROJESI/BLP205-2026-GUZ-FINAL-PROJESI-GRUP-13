@@ -18,10 +18,9 @@ Görev dağılımı ve modül planları: [GOREV_DAGILIMI.md](GOREV_DAGILIMI.md).
 ## Derleme ve Çalıştırma
 
 ```
-g++ -std=c++11 main.cpp modul1.cpp modul2.cpp modul3.cpp modul4.cpp -o kutuphane
+g++ -std=c++11 main.cpp ortak.cpp modul1.cpp modul2.cpp modul3.cpp modul4.cpp -o kutuphane
 ./kutuphane
 ```
-
 
 ## Menü
 
