@@ -13,7 +13,7 @@ BLP 205 Veri Yapıları dersi final projesi. Kitap kataloğu, duyurular, ödün�
 | 3 | Bubble Sort, Insertion Sort, Quick Sort, Binary Search | - |
 | 4 | Komşuluk matrisi ile graf, BFS, DFS, Dijkstra | - |
 
-Görev dağılımı: [GOREV_DAGILIMI.md](GOREV_DAGILIMI.md)
+Görev dağılımı ve modül planları: [GOREV_DAGILIMI.md](GOREV_DAGILIMI.md). Ekip üyeleri başlamadan önce oradaki "Başlarken" bölümünü okumalıdır.
 
 ## Derleme ve Çalıştırma
 
@@ -21,6 +21,7 @@ Görev dağılımı: [GOREV_DAGILIMI.md](GOREV_DAGILIMI.md)
 g++ -std=c++11 main.cpp modul1.cpp modul2.cpp modul3.cpp modul4.cpp -o kutuphane
 ./kutuphane
 ```
+
 
 ## Menü
 
