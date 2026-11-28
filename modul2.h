@@ -9,4 +9,9 @@ void stackPop();
 void stackListele();
 void stackTemizle();
 
+void queueEnqueue(std::string ogrenciNo, std::string adSoyad, std::string kitap);
+void queueDequeue();
+void queueListele();
+void queueTemizle();
+
 #endif

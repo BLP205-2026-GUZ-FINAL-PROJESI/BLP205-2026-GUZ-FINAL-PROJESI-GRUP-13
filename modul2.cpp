@@ -61,3 +61,72 @@ void stackTemizle() {
         delete silinecek;
     }
 }
+
+// Kuyruk dugumu: odunc kitap bekleyen ogrenci kaydi
+struct Ogrenci {
+    string ogrenciNo;
+    string adSoyad;
+    string kitap;
+    Ogrenci* sonraki;
+};
+
+Ogrenci* kuyrukBas = NULL;  // siradaki ilk ogrenci
+Ogrenci* kuyrukSon = NULL;  // siranin en sonundaki ogrenci
+
+// Ogrenciyi siranin sonuna ekler
+void queueEnqueue(string ogrenciNo, string adSoyad, string kitap) {
+    Ogrenci* yeni = new Ogrenci;
+    yeni->ogrenciNo = ogrenciNo;
+    yeni->adSoyad = adSoyad;
+    yeni->kitap = kitap;
+    yeni->sonraki = NULL;
+
+    if (kuyrukBas == NULL) {
+        kuyrukBas = yeni;
+    } else {
+        kuyrukSon->sonraki = yeni;
+    }
+    kuyrukSon = yeni;
+}
+
+// Siradaki ilk ogrenciye hizmet verir ve siradan cikarir
+void queueDequeue() {
+    if (kuyrukBas == NULL) {
+        cout << "Sira bos, bekleyen ogrenci yok." << endl;
+        return;
+    }
+    Ogrenci* silinecek = kuyrukBas;
+    cout << "Hizmet verildi: " << silinecek->adSoyad
+         << " (" << silinecek->ogrenciNo << ") - " << silinecek->kitap << endl;
+    kuyrukBas = kuyrukBas->sonraki;
+    if (kuyrukBas == NULL) {
+        kuyrukSon = NULL;
+    }
+    delete silinecek;
+}
+
+// Sirayi bastan sona (ilk gelen ilk sirada) listeler
+void queueListele() {
+    if (kuyrukBas == NULL) {
+        cout << "Sira bos." << endl;
+        return;
+    }
+    Ogrenci* gecici = kuyrukBas;
+    int sira = 1;
+    while (gecici != NULL) {
+        cout << sira << ". " << gecici->adSoyad << " (" << gecici->ogrenciNo
+             << ") - " << gecici->kitap << endl;
+        gecici = gecici->sonraki;
+        sira++;
+    }
+}
+
+// Program kapanirken kuyruktaki tum dugumleri bellekten siler
+void queueTemizle() {
+    while (kuyrukBas != NULL) {
+        Ogrenci* silinecek = kuyrukBas;
+        kuyrukBas = kuyrukBas->sonraki;
+        delete silinecek;
+    }
+    kuyrukSon = NULL;
+}
